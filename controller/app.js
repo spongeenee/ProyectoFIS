@@ -20,9 +20,13 @@ async function cargarColores() {
             const boton = document.createElement("button");
             boton.type = "button";
             boton.className = "color";
-            boton.style.backgroundColor = c.hex;
+            const muestra = document.createElement("span");
+            muestra.style.backgroundColor = c.hex;
+            muestra.setAttribute("aria-hidden", "true");
+            boton.append(muestra, document.createTextNode(c.nombre));
             boton.title = c.nombre;
             boton.setAttribute("aria-label", c.nombre);
+            boton.setAttribute("aria-pressed", "false");
             boton.onclick = function () { cambiarColor(c, boton); };
             paleta.appendChild(boton);
             if (indice === 0) cambiarColor(c, boton);
@@ -41,11 +45,13 @@ function cambiarColor(c, boton) {
     }
     colorElegido = c;
     document.getElementById("sueter").style.fill = c.hex;
-    document.getElementById("resultado").textContent = "Color seleccionado: " + c.nombre;
+    document.getElementById("resultado").textContent = c.nombre;
     document.querySelectorAll(".color").forEach(function (b) {
         b.classList.remove("activo");
+        b.setAttribute("aria-pressed", "false");
     });
     boton.classList.add("activo");
+    boton.setAttribute("aria-pressed", "true");
     mensaje.textContent = "";
 }
 

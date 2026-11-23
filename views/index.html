@@ -1,43 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Vista previa del Sweater</title>
-<link rel="stylesheet" href="/resources/styles/estilos.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Ugly Sweater · Taller</title>
+    <link rel="stylesheet" href="/resources/styles/estilos.css">
 </head>
 <body>
-<h1>My Ugly Sweater </h1>
-<h2>Vista previa de tu sweater</h2>
-<div class="contenedor">
-<div class="editor">
-<div class="vista">
-<svg viewBox="0 0 300 300">
-<path id="sueter"
-d="M105 45 L75 55 L25 100 L55 155
-L80 135 L80 255 L220 255 L220 135
-L245 155 L275 100 L225 55 L195 45
-Q150 75 105 45 Z"
-fill="#C62828"
-stroke="#43251c"
-stroke-width="5"/>
-<text x="150" y="165"
-text-anchor="middle"
-font-size="40"></text>
-</svg>
-</div>
-<div class="panel-color">
-<span class="etiqueta">color</span>
-<div class="paleta" id="paleta"></div>
-<h3 id="resultado">Cargando colores...</h3>
-</div>
-</div>
-<div class="acciones">
-<button class="confirmar" id="confirmar" disabled>confirmar color</button>
-<button class="guardar" id="guardar" disabled>guardar sweater</button>
-</div>
-<div id="mensaje"></div>
-</div>
-<script src="/controller/app.js"></script>
+    <header class="encabezado">
+        <p class="etiqueta">My Ugly Sweater · Taller</p>
+        <h1>Hazlo <em>muy tuyo.</em></h1>
+        <p class="introduccion">Empieza eligiendo el color perfecto. Nosotros nos encargamos de la magia.</p>
+    </header>
+
+    <main class="contenedor">
+        <section class="vista-previa" aria-label="Vista previa del suéter">
+            <div class="titulo-vista"><span>Vista previa</span><span>Frente</span></div>
+            <div class="vista">
+                <span class="destello" aria-hidden="true">✦</span>
+                <svg viewBox="0 0 520 520" role="img" aria-label="Suéter navideño con el color seleccionado">
+                    <defs>
+                        <filter id="sombra" x="-20%" y="-20%" width="140%" height="150%">
+                            <feDropShadow dx="0" dy="16" stdDeviation="13" flood-opacity=".2"/>
+                        </filter>
+                        <pattern id="tejido" width="12" height="12" patternUnits="userSpaceOnUse">
+                            <path d="M0 0 12 12M12 0 0 12" stroke="#fff" stroke-opacity=".055"/>
+                        </pattern>
+                    </defs>
+                    <ellipse cx="260" cy="462" rx="174" ry="20" fill="#28140e" opacity=".15"/>
+                    <g filter="url(#sombra)">
+                        <!-- JavaScript cambia únicamente el color de este cuerpo. -->
+                        <path id="sueter" fill="#C62828"
+                            d="M178 96 91 130 35 282l83 31 43-94-12 224h222l-12-224 43 94 83-31-56-152-87-34c-15 26-45 41-82 41s-67-15-82-41Z"/>
+                        <!-- El cuello, los puños y el estampado son adornos fijos. -->
+                        <g fill="#F5D7A3">
+                            <path d="M211 84c3 25 23 42 49 42s46-17 49-42l33 12c-15 26-45 41-82 41s-67-15-82-41l33-12Z"/>
+                            <path d="M145 400h230l-4 43H149l-4-43ZM51 253l83 31-16 29-83-31 16-29Zm418 0-83 31 16 29 83-31-16-29Z"/>
+                            <path d="m260 175 12 27 29 3-22 19 7 29-26-15-26 15 7-29-22-19 29-3 12-27Z"/>
+                            <circle cx="205" cy="282" r="8"/>
+                            <circle cx="260" cy="282" r="8"/>
+                            <circle cx="315" cy="282" r="8"/>
+                            <path d="m190 307 7 12 14 3-10 10 2 14-13-6-12 6 2-14-10-10 14-3 6-12Z"/>
+                            <path d="m330 307 7 12 14 3-10 10 2 14-13-6-12 6 2-14-10-10 14-3 6-12Z"/>
+                        </g>
+                        <path d="M170 203h180M160 339h200" stroke="#F5D7A3" stroke-width="18" stroke-dasharray="18 10"/>
+                        <path fill="url(#tejido)"
+                            d="M178 96 91 130 35 282l83 31 43-94-12 224h222l-12-224 43 94 83-31-56-152-87-34c-15 26-45 41-82 41s-67-15-82-41Z"/>
+                    </g>
+                </svg>
+            </div>
+            <p class="leyenda">Los colores pueden variar ligeramente en el producto final.</p>
+        </section>
+
+        <section class="panel-color" aria-label="Selección del color">
+            <p class="paso"><span>01</span> Elige tu color base</p>
+            <h2 id="resultado" aria-live="polite">Cargando colores...</h2>
+            <div class="paleta" id="paleta" role="group" aria-label="Colores disponibles"></div>
+            <div class="acciones">
+                <button class="confirmar" id="confirmar" type="button" disabled>Confirmar color</button>
+                <button class="guardar" id="guardar" type="button" disabled>Guardar mi diseño <span aria-hidden="true">→</span></button>
+            </div>
+            <p id="mensaje" role="status" aria-live="polite"></p>
+        </section>
+    </main>
+    <script src="/controller/app.js"></script>
 </body>
 </html>
